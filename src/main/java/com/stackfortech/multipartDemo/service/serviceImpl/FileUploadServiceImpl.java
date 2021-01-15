@@ -15,7 +15,7 @@ import java.nio.file.Paths;
 @Service
 public class FileUploadServiceImpl implements FileUploadService {
 
-    private String uploadFolderPath = "/Users/deomrinal/desktop/uploaded_";
+    private String uploadFolderPath = "/Users/tanji/desktop/uploadtest/uploaded_";
     @Autowired
     private FileUploadRepository fileUploadRepository;
 

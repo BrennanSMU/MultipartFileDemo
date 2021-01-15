@@ -31,11 +31,12 @@ public class FileUploadController {
     @PostMapping("/upload/local")
     public void uploadLocal(@RequestParam("file")MultipartFile multipartFile) throws IOException, ZipException {
 
-            unzipFiles(multipartFile);
-       //     fileUploadService.uploadToLocal(multipartFile);
+//            unzipFiles(multipartFile);
+            fileUploadService.uploadToLocal(multipartFile);
 
 
     }
+    
     @PostMapping("/upload/db")
     public FileUploadResponse uploadDb(@RequestParam("file")MultipartFile multipartFile)
     {
@@ -57,6 +58,7 @@ public class FileUploadController {
        response.setMessage("Oops 1 something went wrong please re-upload.");
        return response;
     }
+    
     @GetMapping("/download/{id}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String id)
     {
@@ -68,13 +70,13 @@ public class FileUploadController {
     }
 
 
-    public void unzipFiles(MultipartFile file) throws IOException, ZipException {
+    public static void unzipFiles(MultipartFile file) throws IOException, ZipException {
         File zip  = File.createTempFile(UUID.randomUUID().toString(),"temp");
         FileOutputStream outputStream = new FileOutputStream(zip);
         IOUtils.copy(file.getInputStream(),outputStream);
         outputStream.close();
 
-        String destination = "/Users/deomrinal/desktop/";
+        String destination = "/Users/desktop/uploadtest/uploaded_";
         ZipFile zipFile = new ZipFile(zip);
         zipFile.extractAll(destination);
         zip.delete();
